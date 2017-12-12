@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = function (grunt) {
-  grunt.registerMultiTask('grunt_visual_regression', 'The best Grunt plugin ever.', function () {
+  grunt.registerMultiTask('grunt_visual_regression', 'a visual regression plugin', function () {
     var action = this.data.action
     var files = this.filesSrc
 
@@ -9,7 +9,9 @@ module.exports = function (grunt) {
       var path = require('path')
       var execSync = require('child_process').execSync
       var phantomjs = require('phantomjs-prebuilt')
-      var cmd = phantomjs.path + ' ' + path.join(__dirname, 'screen/phantom-screenshot.js ') + files.join() + ' ' + action
+      var directory = /www\/(.*)/g.exec(process.cwd().replace(/\\/g, '/'))
+
+      var cmd = phantomjs.path + ' ' + path.join(__dirname, 'screen/phantom-screenshot.js ') + files.join() + ' ' + action + ' ' + directory[1]
 
       execSync(cmd, {
         stdio: [0, 1, 2]
@@ -23,19 +25,21 @@ module.exports = function (grunt) {
       const { imgDiff } = require('img-diff-js')
       var wait = require('wait-for-stuff')
 
-      nextDiff()
+      nextDiff(this.data.options)
 
-      function nextDiff () {
+      function nextDiff (options) {
         var file = files.shift()
+
 
         if (!file) return
 
         var pathImg = file.split('reference/')[1]
+                console.log(pathImg)
         var referenceImg = 'test/regression-visuelle/reference/' + pathImg
         var currentImg = 'test/regression-visuelle/current/' + pathImg
         var differenceImg = 'test/regression-visuelle/difference/' + pathImg
-        var threshold = 0.1 // 0.1: strict // 1: pass
-        var AA = false
+        var threshold = options.threshold // 0.1: strict // 1: pass
+        var AA = options.antiAliasing
 
         wait.for.promise(imgDiff({
           actualFilename: referenceImg,
@@ -47,7 +51,7 @@ module.exports = function (grunt) {
           }
         }).then(function (results) {
           var nbPixels = results.width * results.height
-          var diff = Math.round(results.diffCount / nbPixels * 100) / 100
+          var diff = (results.diffCount / nbPixels).toFixed(2)
 
           if (results.imagesAreSame) {
             grunt.log.writeln((pathImg + ' is OK :) // Difference: ' + diff + '%'))
@@ -55,7 +59,7 @@ module.exports = function (grunt) {
             grunt.log.writeln((pathImg + ' is changed ! :( // Difference: ' + diff + '%')['red'])
           }
 
-          nextDiff()
+          nextDiff(options)
         }))
       }
     }

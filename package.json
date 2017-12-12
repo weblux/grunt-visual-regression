@@ -1,7 +1,7 @@
 {
   "name": "grunt-visual-regression",
   "description": "visual regression test",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "homepage": "https://github.com/weblux/grunt-visual-regression",
   "author": {
     "name": "esteban"

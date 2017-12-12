@@ -24,7 +24,7 @@ In your project's Gruntfile, add a section named `visual_regression` to the data
 
 ```js
 grunt.initConfig({
-  visual_regression: {
+  grunt_visual_regression: {
     reference: {
       action: 'reference',
       files: [{
@@ -45,6 +45,8 @@ grunt.initConfig({
     },
     difference: {
       action: 'difference',
+      threshold: 0.1,
+      antiAliasing: false,
       files: [{
         expand: true,
         cwd: 'test/regression-visuelle/reference',
@@ -52,64 +54,62 @@ grunt.initConfig({
         dest: 'test/regression-visuelle/difference'
       }],
     }
-  },
+  }
 });
 
+// For better use
 grunt.registerTask('screen', ['screen:current', 'screen:difference'])
 grunt.registerTask('screen:reference', ['clean:reference', 'visual_regression:reference'])
 grunt.registerTask('screen:current', ['clean:current', 'visual_regression:current'])
 grunt.registerTask('screen:difference', ['clean:difference', 'visual_regression:difference'])
 ```
+### Tasks
+
+#### Referrence / Current
+
+Take a screen of all file pass by the Gruntfile. Get a PNG image.
+
+#### Difference
+
+Compare reference and difference image. Return a PNG image with the difference
 
 ### Options
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
+#### Difference task
 
-A string value that is used to do something with whatever.
+threshold: number ==> 0.1 for strict test, 1 for pass test, default: 0.1
+antiAliasing: boolean ==> false to disabled in test, true to enable, default: false
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
+### How to use
 
-A string value that is used to do something else with whatever else.
+#### Reference/Current
 
-### Usage Examples
+Execute grunt screen:reference/screen:current and get the result
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+![referenceImg](use/reference.png)
 
-```js
-grunt.initConfig({
-  visual_regression: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
+#### Difference
+
+Execute grunt screen:reference/screen:current and get the result
+
+![differenceImg](use/difference.png)
+
+### Examples
+
+Reference
+
+![referenceExampleImg](example/reference.png)
+
+Current
+
+![currentExampleImg](example/current.png)
+
+Difference
+
+![differenceExampleImg](example/difference.png)
+
 ```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
-```js
-grunt.initConfig({
-  visual_regression: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
-```
-
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
-
 ## Release History
-_(Nothing yet)_
+
+1.0.0
+Plugin work
