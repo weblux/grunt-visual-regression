@@ -77,8 +77,8 @@ Compare reference and difference image. Return a PNG image with the difference
 
 #### Difference task
 
-threshold: number ==> 0.1 for strict test, 1 for pass test, default: 0.1
-antiAliasing: boolean ==> false to disabled in test, true to enable, default: false
+* threshold: number ==> 0.1 for strict test, 1 for pass test, default: 0.1
+* antiAliasing: boolean ==> false to disabled in test, true to enable, default: false
 
 ### How to use
 
