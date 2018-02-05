@@ -43,6 +43,7 @@ module.exports = function (grunt) {
         var differenceImg = 'test/regression-visuelle/difference/' + pathImg
         var threshold = options.threshold // 0.1: strict // 1: pass
         var AA = options.antiAliasing
+        var generateOnlyDiffFile = options.generateOnlyDiffFile
 
         wait.for.promise(imgDiff({
           actualFilename: referenceImg,
@@ -51,7 +52,7 @@ module.exports = function (grunt) {
           options: {
             threshold: threshold,
             includeAA: AA,
-            generateOnlyDiffFile: true
+            generateOnlyDiffFile: generateOnlyDiffFile
           }
         }).then(function (results) {
           var nbPixels = results.width * results.height
