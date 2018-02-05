@@ -35,11 +35,10 @@ module.exports = function (grunt) {
       function nextDiff (options) {
         var file = files.shift()
 
-
         if (!file) return
 
         var pathImg = file.split('reference/')[1]
-                console.log(pathImg)
+
         var referenceImg = 'test/regression-visuelle/reference/' + pathImg
         var currentImg = 'test/regression-visuelle/current/' + pathImg
         var differenceImg = 'test/regression-visuelle/difference/' + pathImg

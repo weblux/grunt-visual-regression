@@ -28,9 +28,10 @@ function handlePage (directory, url) {
   url = directory + url
   page.open(url, function (status) {
     if (status === 'fail') {
-      console.log("******** Page " + filename + " can't open *********")
+      console.log('******** Page ' + filename + " can't open *********")
     } else {
       var rendered = false
+      console.log(' Page ' + filename + ' is open ')
 
       breakpoint.forEach(function (point) {
         page.viewportSize = { width: point.width, height: point.height }
@@ -55,7 +56,7 @@ function nextPage () {
     phantom.exit(0)
   }
 
-  handlePage('http://127.0.0.1/'+ directory + '/', url)
+  handlePage('http://127.0.0.1/' + directory + '/', url)
 }
 
 nextPage()
