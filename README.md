@@ -111,5 +111,8 @@ Difference
 ```
 ## Release History
 
+1.0.1
+Stop tasks if public files not found
+
 1.0.0
 Plugin work

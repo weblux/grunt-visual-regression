@@ -10,7 +10,7 @@ var page = webpage.create()
 var breakpoint = [
    { name: 'palm', width: 320, height: 560 }, // palm
    { name: 'lap', width: 720, height: 560 }, // lap
-   { name: 'desk', width: 984, height: 900 }, // desk
+   { name: 'desk', width: 984, height: 900 } // desk
 ]
 var urls = system.args[1].split(',')
 var typeScreen = system.args[2]
@@ -27,11 +27,10 @@ function handlePage (directory, url) {
 
   url = directory + url
   page.open(url, function (status) {
-    if (status === "fail") {
+    if (status === 'fail') {
       console.log("******** Page " + filename + " can't open *********")
     } else {
       var rendered = false
-      console.log(' Page ' + filename + ' is open ')
 
       breakpoint.forEach(function (point) {
         page.viewportSize = { width: point.width, height: point.height }

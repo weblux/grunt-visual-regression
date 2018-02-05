@@ -6,6 +6,11 @@ module.exports = function (grunt) {
     var files = this.filesSrc
 
     if (action === 'reference' || action === 'current') {
+      if (files.length === 0) {
+        grunt.log.error('************* No public page found :(, please generate public with grunt  ****************')
+        return
+      }
+
       var path = require('path')
       var execSync = require('child_process').execSync
       var phantomjs = require('phantomjs-prebuilt')
