@@ -38,7 +38,6 @@ module.exports = function (grunt) {
         if (!file) return
 
         var pathImg = file.split('reference/')[1]
-
         var referenceImg = 'test/regression-visuelle/reference/' + pathImg
         var currentImg = 'test/regression-visuelle/current/' + pathImg
         var differenceImg = 'test/regression-visuelle/difference/' + pathImg
@@ -51,7 +50,8 @@ module.exports = function (grunt) {
           diffFilename: differenceImg,
           options: {
             threshold: threshold,
-            includeAA: AA
+            includeAA: AA,
+            generateOnlyDiffFile: true
           }
         }).then(function (results) {
           var nbPixels = results.width * results.height

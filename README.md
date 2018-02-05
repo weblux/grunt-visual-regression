@@ -79,6 +79,7 @@ Compare reference and difference image. Return a PNG image with the difference
 
 * threshold: number ==> 0.1 for strict test, 1 for pass test, default: 0.1
 * antiAliasing: boolean ==> false to disabled in test, true to enable, default: false
+* generateOnlyDiffFile: boolean ==> true to only generate the file with difference, false to generate all the difference file
 
 ### How to use
 
