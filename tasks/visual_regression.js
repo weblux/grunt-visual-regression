@@ -49,10 +49,10 @@ module.exports = function (grunt) {
           actualFilename: referenceImg,
           expectedFilename: currentImg,
           diffFilename: differenceImg,
+          generateOnlyDiffFile: generateOnlyDiffFile,
           options: {
             threshold: threshold,
-            includeAA: AA,
-            generateOnlyDiffFile: generateOnlyDiffFile
+            includeAA: AA
           }
         }).then(function (results) {
           var nbPixels = results.width * results.height
