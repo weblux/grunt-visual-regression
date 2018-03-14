@@ -58,11 +58,12 @@ module.exports = function (grunt) {
           var nbPixels = results.width * results.height
           var diff = (results.diffCount / nbPixels).toFixed(2)
 
-          if (results.imagesAreSame) {
-            grunt.log.writeln((pathImg + ' is OK :)))
-          } else {
-            grunt.log.writeln((pathImg + ' is changed ! :()['red'])
-          }
+            if (results.imagesAreSame) {
+              grunt.log.writeln((pathImg + ' is OK :)'))
+            } else {
+              grunt.log.writeln((pathImg + ' is changed ! :(')['red'])
+            }
+
 
           nextDiff(options)
         }))
